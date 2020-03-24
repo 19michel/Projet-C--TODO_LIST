@@ -5,32 +5,32 @@
 #include <tuple>
 #include "task.h"
 #include "todo.h"
+using namespace std;
 
 #pragma once
 
+vector<string> c_t_str (int argc, char**  argv);
 
-std::vector<std::string> extract ();
+vector<string> extract ();
 
-void write (std::ofstream& ofs, char** argv, int i, int nb);
+void write (ofstream& ofs, const vector<string> & v_str, int i, int nb);
 
-void write (std::ofstream& ofs, const char** argv, int i, int nb);
+To_Do main_notxt(const vector<string> & v_str);
 
-To_Do main_notxt(int argc, std::vector<std::string> extr);
+vector<string> main_add (const vector<string> & v_str, To_Do & list, int & i) ;
 
-std::tuple<int,To_Do,const char**> main_add (int argc, char** argv, To_Do list, int i) ;
+vector<string> main_close(const vector<string> & v_str, To_Do & list, int & i);
 
-std::tuple<int,To_Do,const char**> main_close(int argc, char** argv, To_Do list, int i);
+void main_add_str (const vector<string> & v_str, To_Do & list, int & i) ;
 
-std::tuple<int,To_Do> main_add_str (int argc, std::vector<std::string> argv, To_Do list, int i) ;
+void main_close_str (const vector<string> & v_str, To_Do & list, int & i);
 
-std::tuple<int,To_Do> main_close_str (int argc, std::vector<std::string> argv, To_Do list, int i);
+void main_change (const vector<string> & v_str, To_Do & list, int & i);
 
-std::tuple<int,To_Do> main_change (int argc, char** argv, To_Do list, int i);
+void main_comments (const vector<string> & v_str, To_Do & list, int & i);
 
-std::tuple<int,To_Do> main_comments (int argc, char** argv, To_Do list, int i);
+void main_change_str (const vector<string> & v_str, To_Do & list, int & i) ;
 
-std::tuple<int,To_Do> main_change_str (int argc, std::vector<std::string> argv, To_Do list, int i) ;
-
-std::tuple<int,To_Do> main_comments_str (int argc, std::vector<std::string> argv, To_Do list, int i);
+void main_comments_str (const vector<string> & v_str, To_Do & list, int & i);
 
 void main_del ();

@@ -1,3 +1,7 @@
+#include <vector>
+#include <string>
+using namespace std;
+
 #pragma once
 
 class Date {
@@ -11,7 +15,7 @@ private:
 public:
     Date (int day = 01, int month = 01, int year = 2000, int hours = 0, int minutes = 0, int seconds = 0);
     void print ();
-    const char** to_str ();
+    vector<string> d_t_str ();
 };
 
 

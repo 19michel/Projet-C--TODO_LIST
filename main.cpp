@@ -5,19 +5,22 @@
 #include "task.h"
 #include "todo.h"
 #include "fonctions.h"
+using namespace std;
 
-int main (int argc, char** argv) {
-    std::vector<std::string> extr = extract();
-    std::ofstream ofs;
-    ofs.open("list.todo",std::ofstream::out | std::ofstream::app);
+int main(int argc, char** argv) {
+    vector<string> v_str = c_t_str(argc, argv);
+    vector<string> extr = extract();
+    ofstream ofs;
+    ofs.open("list.todo",ofstream::out | ofstream::app);
     To_Do list; 
-    list = main_notxt(extr.size(), extr);
+    list = main_notxt(extr);
+    int size = v_str.size();
     int i = 1;
-    while (i<argc) {
-        if (std::string(argv[i]) == "print") {
-            if (i+1<argc && std::string(argv[i+1]) == "--priority") {
+    while (i<size) {
+        if (string(v_str[i]) == "print") {
+            if (i+1<size && string(v_str[i+1]) == "--priority") {
                 i=i+2;
-                list.print(std::stoi(argv[i]));
+                list.print(stoi(v_str[i]));
                 i++;
             }
             else {
@@ -26,53 +29,42 @@ int main (int argc, char** argv) {
             }
             continue;
         }
-        if (std::string(argv[i]) == "add") {
-            std::cout << "add" ;
-            std::tuple<int,To_Do,const char**> tup = main_add(argc, argv, list, i);
-            int inew = std::get<0>(tup);
-            list = std::get<1>(tup);
-            write(ofs,argv,i,inew-i);
-            const char** date = std::get<2>(tup);
-            const char* word [1];
-            word[0] = "--date";
+        if (string(v_str[i]) == "add") {
+            int j = i;
+            vector<string> date = main_add(v_str, list, i);
+            write(ofs,v_str,j,i-j);
+            vector<string> word {};
+            word.push_back("--date");
             write(ofs,word,0,1);
             write(ofs,date,0,6);
-            i = inew;
             continue;
         }
-        if (std::string(argv[i]) == "close") {
-            std::tuple<int,To_Do,const char**> tup = main_close(argc, argv, list, i);
-            int inew = std::get<0>(tup);
-            list = std::get<1>(tup);
-            write(ofs,argv,i,inew-i);
-            const char** date = std::get<2>(tup);
-            const char* word [1];
-            word[0] = "--date";
+        if (string(v_str[i]) == "close") {
+            int j = i;
+            vector<string> date = main_close(v_str, list, i);
+            write(ofs,v_str,j,i-j);
+            vector<string> word {};
+            word.push_back("--date");
             write(ofs,word,0,1);
             write(ofs,date,0,6);
-            i = inew;
             continue;
         }
-        if (std::string(argv[i]) == "del") {
+        if (string(v_str[i]) == "del") {
             main_del();
             i += 1;
             To_Do list {};
             continue;
         }
-        if (std::string(argv[i]) == "change") {
-            std::tuple<int,To_Do> tup = main_change(argc, argv, list, i);
-            int inew = std::get<0>(tup);
-            list = std::get<1>(tup);
-            write(ofs,argv,i,inew-i);
-            i = inew;
+        if (string(v_str[i]) == "change") {
+            int j = i;
+            main_change(v_str, list, i);
+            write(ofs,v_str,j,i-j);
             continue;
         }
-        if (std::string(argv[i]) == "comments") {
-            std::tuple<int,To_Do> tup = main_comments(argc, argv, list, i);
-            int inew = std::get<0>(tup);
-            list = std::get<1>(tup);
-            write(ofs,argv,i,inew-i);
-            i = inew;
+        if (string(v_str[i]) == "comments") {
+            int j = i;
+            main_comments(v_str, list, i);
+            write(ofs,v_str,j,i-j);
             continue;
         }
     }

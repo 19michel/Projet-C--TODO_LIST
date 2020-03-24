@@ -16,9 +16,9 @@ public:
 
     void print (int p) ;
 
-    const char** add (std::string t, std::string d, int p) ;
+    vector<string> add (std::string t, std::string d, int p) ;
 
-    const char** add_st (std::string st, std::string t, std::string d, int p) ;
+    vector<string> add_st (std::string st, std::string t, std::string d, int p) ;
 
     void add_dated (std::string t, std::string d, int p, Date op) ;
 
@@ -40,9 +40,9 @@ public:
 
     void change_achiev_st (std::string st, std::string t, int a) ;
 
-    const char** end (std::string t) ;
+    vector<string> end (std::string t) ;
 
-    const char** end_st (std::string st, std::string t) ;
+    vector<string> end_st (std::string st, std::string t) ;
 
     void end_dated (std::string t, Date cl) ;
 
