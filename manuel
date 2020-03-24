@@ -1,0 +1,51 @@
+NAME
+        ./todo - keep in mind your tasks
+
+SYNOPSIS
+        ./todo
+
+DESCRIPTION
+        ./todo allows to create a list of tasks. Each task is caracterised by some parameters
+
+            -id : an unique number
+
+            -title : a string which is used to call the task
+
+            -description : a quick summary of the content of the task
+
+            -status : a task can be 'opened' or 'closed'
+
+            -a date of opening and a date of closing if the task is closed
+
+            -priority : a number between 0 and 10 which caracterised the importance of the task. By convention, a priority of -1 designed
+             a closed task
+
+            -achievement : a purcentage which allows to know on what extend the task is advanced
+
+            -comments : a list of informations about the task
+
+            -subtasks : a list of other tasks which have to be done in order to achieve the main task 
+
+COMMANDS
+        Here are the commands you can use to create your to-do list and modify the tasks
+
+add [ --title ] [ --description ] [ --priority ] :
+        Create a new task in the to-do list. You can precise the title, the decription and the priority. If you precise nothing, the
+        task will be entitled "No title", be described by "No description" and have a priority minimal of 0
+
+print [ --priority ]
+        Display the to-do list task by task. If you precise the priority with an int p, only the tasks with a priority superior to p 
+        will be printed
+
+close --title
+        Set the status of the task called by the title you give on closed
+
+del
+        Delete the to-do list. It erease all the content of the file list.todo in which the previous commands are writed
+
+change --title [ --priority ] [ --achiev ]
+        Change a parameter of the task entitled by the title. It is necessary to precise which parameter by giving an argument among 
+        the list above 
+
+comments --title --comments
+        Add a string of comment to the task called by the title which is given

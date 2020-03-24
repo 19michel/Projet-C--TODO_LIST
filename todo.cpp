@@ -108,6 +108,7 @@ vector<string> To_Do::end (string t) {
     list[i].closing();
     vector<string> date = list[list.size() - 1].close.d_t_str();
     sort(list.begin(),list.end(),sort_priority);
+    return date;
 }
 
 vector<string> To_Do::end_st (string st, string t) {
@@ -116,6 +117,7 @@ vector<string> To_Do::end_st (string st, string t) {
     list[i].subtask[j].closing();
     vector<string> date = list[i].subtask[list[i].subtask.size() - 1].close.d_t_str();
     sort(list[i].subtask.begin(),list[i].subtask.end(),sort_priority);
+    return date;
 }
 
 void To_Do::end_dated (string t, Date cl) {

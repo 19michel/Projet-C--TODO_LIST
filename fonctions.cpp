@@ -10,10 +10,10 @@ vector<string> c_t_str (int argc, char** argv) {
 }
 
 vector<string> main_add (const vector<string> & v_str, To_Do & list, int & i) {
-    string title;
-    string description;
+    string title = "No title";
+    string description = "No description";
     string st;
-    int p;
+    int p = 0;
     bool test_st = false;
     i++;
     while ((i<v_str.size()) && (v_str[i][0]=='-' && v_str[i][1]=='-')) {
@@ -51,11 +51,11 @@ vector<string> main_add (const vector<string> & v_str, To_Do & list, int & i) {
 }
 
 void main_add_str (const vector<string> &  v_str, To_Do & list, int & i) {
-    string title;
-    string description;
+    string title = "No title";
+    string description = "No description";
     string st;
     Date op;
-    int p;
+    int p = 0;
     bool test_st = false;
     i++;
     while ((i<v_str.size()) && (v_str[i][0]=='-' && v_str[i][1]=='-')) {
