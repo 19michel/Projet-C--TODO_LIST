@@ -2,7 +2,7 @@ NAME
         ./todo - keep in mind your tasks
 
 SYNOPSIS
-        ./todo
+        ./todo [ --help ] <COMMAND>
 
 DESCRIPTION
         ./todo allows to create a list of tasks. Each task is caracterised by some parameters
