@@ -2,7 +2,7 @@ NAME
         ./todo - keep in mind your tasks
 
 SYNOPSIS
-        ./todo [ --help ] <COMMAND>
+        ./todo [ --help ] <COMMAND>  
 
 DESCRIPTION
         ./todo allows to create a list of tasks. Each task is caracterised by some parameters
@@ -24,7 +24,10 @@ DESCRIPTION
 
             -comments : a list of informations about the task
 
-            -subtasks : a list of other tasks which have to be done in order to achieve the main task 
+            -subtasks : a list of other tasks which have to be done in order to achieve the main task
+
+OPTION
+        --help allows to display this manuel
 
 COMMANDS
         Here are the commands you can use to create your to-do list and modify the tasks
@@ -37,15 +40,15 @@ print [ --priority ]
         Display the to-do list task by task. If you precise the priority with an int p, only the tasks with a priority superior to p 
         will be printed
 
-close --title
-        Set the status of the task called by the title you give on closed
+close [ --title ] [ --id ]
+        Set the status of the task called by the title or the id you give on closed
 
 del
         Delete the to-do list. It erease all the content of the file list.todo in which the previous commands are writed
 
-change --title [ --priority ] [ --achiev ]
-        Change a parameter of the task entitled by the title. It is necessary to precise which parameter by giving an argument among 
-        the list above 
+change [ --title ] [ --id ] [ --priority ] [ --achiev ]
+        Change a parameter of the task entitled by the title or caracterised by the id. It is necessary to precise which parameter by 
+        giving an argument among the list above 
 
-comments --title --comments
+comments [ --title ] [ --id ] --comments
         Add a string of comment to the task called by the title which is given

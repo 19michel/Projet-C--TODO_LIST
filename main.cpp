@@ -8,6 +8,9 @@
 using namespace std;
 
 int main(int argc, char** argv) {
+    if (argc > 0 && string(argv[1]) == "--help") {
+        system("less manuel");
+    }
     vector<string> v_str = c_t_str(argc, argv);
     vector<string> extr = extract();
     ofstream ofs;

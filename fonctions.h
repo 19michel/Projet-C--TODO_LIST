@@ -21,16 +21,12 @@ vector<string> main_add (const vector<string> & v_str, To_Do & list, int & i) ;
 
 vector<string> main_close(const vector<string> & v_str, To_Do & list, int & i);
 
-void main_add_str (const vector<string> & v_str, To_Do & list, int & i) ;
+void main_add_dated (const vector<string> & v_str, To_Do & list, int & i) ;
 
-void main_close_str (const vector<string> & v_str, To_Do & list, int & i);
+void main_close_dated (const vector<string> & v_str, To_Do & list, int & i);
 
 void main_change (const vector<string> & v_str, To_Do & list, int & i);
 
 void main_comments (const vector<string> & v_str, To_Do & list, int & i);
-
-void main_change_str (const vector<string> & v_str, To_Do & list, int & i) ;
-
-void main_comments_str (const vector<string> & v_str, To_Do & list, int & i);
 
 void main_del ();

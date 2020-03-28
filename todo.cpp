@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <tuple>
 #include "task.h"
 #include "todo.h"
 using namespace std;
@@ -61,6 +62,26 @@ int To_Do::pos (string t) {
     return i;
 }
 
+tuple<int,int> To_Do::pos (int ide) {
+    int i {};
+    int j {};
+    for (i; i<list.size(); i++) {
+        if (list[i].id == ide) {
+            j = -1;
+            break;
+        }
+        for (j; j<list[i].subtask.size(); j++) {
+            if (list[i].subtask[j].id == ide) {
+                break;
+            } 
+        }
+    }
+    tuple<int,int> tup;
+    get<0>(tup) = i;
+    get<1>(tup) = j + 1;
+    return tup;
+}
+
 int To_Do::pos_st (string st, string t) {
     int i = pos(t);
     int j {};
@@ -71,6 +92,18 @@ int To_Do::pos_st (string st, string t) {
 void To_Do::add_comments (string t, string c) {
     int i = pos(t);
     list[i].comments.push_back(c); 
+}
+
+void To_Do::add_comments (int ide, string c) {
+    tuple<int,int> tup = pos(ide);
+    int i = get<0>(tup);
+    int j = get<1>(tup);
+    if (j == 0) {
+        list[i].comments.push_back(c); 
+    }
+    else {
+        list[i].subtask[j-1].comments.push_back(c);
+    }
 }
 
 void To_Do::add_comments_st (string st, string t, string c) {
@@ -85,9 +118,35 @@ void To_Do::change_priority (string t, int p) {
     sort(list.begin(),list.end(),sort_priority);
 }
 
+void To_Do::change_priority (int ide, int p) {
+    tuple<int,int> tup = pos(ide);
+    int i = get<0>(tup);
+    int j = get<1>(tup);
+    if (j == 0) {
+        list[i].priority = p;
+        sort(list.begin(),list.end(),sort_priority); 
+    }
+    else {
+        list[i].subtask[j-1].priority = p;
+        sort(list[i].subtask.begin(),list[i].subtask.end(),sort_priority);
+    }
+}
+
 void To_Do::change_achiev (string t, int a) {
     int i = pos(t);
     list[i].achiev = a;
+}
+
+void To_Do::change_achiev (int ide, int a) {
+    tuple<int,int> tup = pos(ide);
+    int i = get<0>(tup);
+    int j = get<1>(tup);
+    if (j == 0) {
+        list[i].achiev = a; 
+    }
+    else {
+        list[i].subtask[j-1].achiev = a;
+    }
 }
 
 void To_Do::change_priority_st (string st, string t, int p) {
@@ -106,8 +165,26 @@ void To_Do::change_achiev_st (string st, string t, int a) {
 vector<string> To_Do::end (string t) {
     int i = pos(t);
     list[i].closing();
-    vector<string> date = list[list.size() - 1].close.d_t_str();
+    vector<string> date = list[i].close.d_t_str();
     sort(list.begin(),list.end(),sort_priority);
+    return date;
+}
+
+vector<string> To_Do::end (int ide) {
+    tuple<int,int> tup = pos(ide);
+    int i = get<0>(tup);
+    int j = get<1>(tup);
+    vector<string> date;
+    if (j == 0) {
+        list[i].closing();
+        date = list[i].close.d_t_str();
+        sort(list.begin(),list.end(),sort_priority); 
+    }
+    else {
+        list[i].subtask[j-1].closing();
+        date = list[i].subtask[j-1].close.d_t_str();
+        sort(list[i].subtask.begin(),list[i].subtask.end(),sort_priority);
+    }
     return date;
 }
 
@@ -115,7 +192,7 @@ vector<string> To_Do::end_st (string st, string t) {
     int i = pos(t);
     int j = pos_st(st,t);
     list[i].subtask[j].closing();
-    vector<string> date = list[i].subtask[list[i].subtask.size() - 1].close.d_t_str();
+    vector<string> date = list[i].subtask[j].close.d_t_str();
     sort(list[i].subtask.begin(),list[i].subtask.end(),sort_priority);
     return date;
 }
@@ -124,6 +201,21 @@ void To_Do::end_dated (string t, Date cl) {
     int i = pos(t);
     list[i].closing_dated(cl);
     sort(list.begin(),list.end(),sort_priority);
+}
+
+void To_Do::end_dated (int ide, Date cl) {
+    tuple<int,int> tup = pos(ide);
+    int i = get<0>(tup);
+    int j = get<1>(tup);
+    vector<string> date;
+    if (j == 0) {
+        list[i].closing_dated(cl);
+        sort(list.begin(),list.end(),sort_priority); 
+    }
+    else {
+        list[i].subtask[j-1].closing_dated(cl);
+        sort(list[i].subtask.begin(),list[i].subtask.end(),sort_priority);
+    }
 }
 
 void To_Do::end_st_dated (string st, string t, Date cl) {

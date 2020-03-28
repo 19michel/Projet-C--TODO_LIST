@@ -50,7 +50,7 @@ vector<string> main_add (const vector<string> & v_str, To_Do & list, int & i) {
     return date;
 }
 
-void main_add_str (const vector<string> &  v_str, To_Do & list, int & i) {
+void main_add_dated (const vector<string> &  v_str, To_Do & list, int & i) {
     string title = "No title";
     string description = "No description";
     string st;
@@ -110,7 +110,9 @@ void main_add_str (const vector<string> &  v_str, To_Do & list, int & i) {
 vector<string> main_close (const vector<string> & v_str, To_Do & list, int & i) {
     string title;
     string st;
+    int id;
     bool test_st = false;
+    bool test_id = false;
     i++;
     while ((i<v_str.size()) && (string(v_str[i])[0]=='-' && string(v_str[i])[1]=='-')) {
         if (string(v_str[i]) == "--title") {
@@ -126,19 +128,33 @@ vector<string> main_close (const vector<string> & v_str, To_Do & list, int & i) 
             i++;
             continue;
         }
+        if (string(v_str[i]) == "--id") {
+            i++;
+            id = stoi(v_str[i]);
+            test_id = true;
+            i++;
+            continue;
+        }
         i++;
     }
     vector<string> date;
-    if (test_st) {date = list.end_st(title, st);}
-    else {date = list.end(title);}
+    if (test_id) {
+        date = list.end(id);
+    }
+    else {
+        if (test_st) {date = list.end_st(title, st);}
+        else {date = list.end(title);}
+    }
     return date;
 }
 
-void main_close_str (const vector<string> & v_str, To_Do & list, int & i) {
+void main_close_dated (const vector<string> & v_str, To_Do & list, int & i) {
     string title;
     string st;
     Date cl;
+    int id;
     bool test_st = false;
+    bool test_id = false;
     i++;
     while ((i<v_str.size()) && (v_str[i][0]=='-' && v_str[i][1]=='-')) {
         if (v_str[i] == "--title") {
@@ -171,10 +187,20 @@ void main_close_str (const vector<string> & v_str, To_Do & list, int & i) {
             i++;
             continue;
         }
+        if (string(v_str[i]) == "--id") {
+            i++;
+            id = stoi(v_str[i]);
+            test_id = true;
+            i++;
+            continue;
+        }
         i++;
     }
-    if (test_st) {list.end_st_dated(title, st, cl);}
-    else {list.end_dated(title, cl);}
+    if (test_id) {list.end_dated(id, cl);}
+    else {
+        if (test_st) {list.end_st_dated(title, st, cl);}
+        else {list.end_dated(title, cl);}
+    }
 }
 
 void write (ofstream& ofs, const vector<string> & argv, int i, int nb) {
@@ -190,19 +216,19 @@ To_Do main_notxt (const vector<string> & v_str) {
     int i = 0;
     while (i<argc) {
         if (v_str[i] == "add") {
-            main_add_str(v_str, list, i);
+            main_add_dated(v_str, list, i);
             continue;
         }
         if (v_str[i] == "close") {
-            main_close_str(v_str, list, i);
+            main_close_dated(v_str, list, i);
             continue;
         }
         if (v_str[i] == "change") {
-            main_change_str(v_str, list, i);
+            main_change(v_str, list, i);
             continue;
         }
         if (v_str[i] == "comments") {
-            main_comments_str(v_str, list, i);
+            main_comments(v_str, list, i);
             continue;
         }
     }
@@ -232,7 +258,9 @@ void main_del () {
 void main_change (const vector<string> & v_str, To_Do & list, int & i) {
     string title;
     string st;
+    int id;
     bool test_st = false;
+    bool test_id = false;
     int func {};
     int p {};
     int ac {};
@@ -264,77 +292,39 @@ void main_change (const vector<string> & v_str, To_Do & list, int & i) {
             i++;
             continue;
         }
-        i++;
-    }
-    if (test_st) {
-        if (func == 0) {
-            list.change_priority_st(title, st, p);
-        }
-        if (func == 1) {
-            list.change_achiev_st(title, st, ac);
-        }
-    }
-    else {
-        if (func == 0) {
-            list.change_priority(title, p);
-        }
-        if (func == 1) {
-            list.change_achiev(title, ac);
-        }
-    }
-}
-
-void main_change_str (const vector<string> & v_str, To_Do & list, int & i) {
-    string title;
-    string st;
-    bool test_st = false;
-    int func {};
-    int p {};
-    int ac {};
-    i++;
-    while ((i<v_str.size()) && (v_str[i][0]=='-' && v_str[i][1]=='-')) {
-        if (v_str[i] == "--title") {
+        if (string(v_str[i]) == "--id") {
             i++;
-            title = v_str[i];
-            i++;
-            continue;
-        }
-        if (v_str[i] == "--priority") {
-            i++;
-            p = stoi(v_str[i]);
-            i++;
-            continue;
-        }
-        if (v_str[i] == "--achiev") {
-            i++;
-            ac = stoi(v_str[i]);
-            func = 1;
-            i++;
-            continue;
-        }
-        if (v_str[i] == "--subtask") {
-            i++;
-            st=v_str[i];
-            test_st = true;
+            id = stoi(v_str[i]);
+            test_id = true;
             i++;
             continue;
         }
         i++;
     }
-    if (test_st) {
+    if (test_id) {
         if (func == 0) {
-            list.change_priority_st(title, st, p);
+            list.change_priority(id, p);
         }
         if (func == 1) {
-            list.change_achiev_st(title, st, ac);
+            list.change_achiev(id, ac);
         }
     }
     else {
-        if (func == 0) {
-            list.change_priority(title, p);
+        if (test_st) {
+            if (func == 0) {
+                list.change_priority_st(title, st, p);
+            }
+            if (func == 1) {
+                list.change_achiev_st(title, st, ac);
+            }
         }
-        if (func == 1) {
-            list.change_achiev(title, ac);
+        else {
+            if (func == 0) {
+                list.change_priority(title, p);
+            }
+            if (func == 1) {
+                list.change_achiev(title, ac);
+            }
         }
     }
 }
@@ -343,7 +333,9 @@ void main_comments (const vector<string> & v_str, To_Do & list, int & i) {
     string title;
     string st;
     string comments;
+    int id;
     bool test_st = false;
+    bool test_id = false;
     i++;
     while ((i<v_str.size()) && (v_str[i][0]=='-' && v_str[i][1]=='-')) {
         if (v_str[i] == "--title") {
@@ -365,40 +357,18 @@ void main_comments (const vector<string> & v_str, To_Do & list, int & i) {
             i++;
             continue;
         }
-        i++;
-    }
-    if (test_st) {list.add_comments_st(title, st, comments);}
-    else {list.add_comments(title, comments);}    
-}
-
-void main_comments_str (const vector<string> & v_str, To_Do & list, int & i) {
-    string title;
-    string st;
-    string comments;
-    bool test_st = false;
-    i++;
-    while ((i<v_str.size()) && (v_str[i][0]=='-' && v_str[i][1]=='-')) {
-        if (v_str[i] == "--title") {
+        if (string(v_str[i]) == "--id") {
             i++;
-            title = v_str[i];
-            i++;
-            continue;
-        }
-        if (v_str[i] == "--comments") {
-            i++;
-            comments = v_str[i];
-            i++;
-            continue;
-        }
-        if (v_str[i] == "--subtask") {
-            i++;
-            st=v_str[i];
-            test_st = true;
+            id = stoi(v_str[i]);
+            test_id = true;
             i++;
             continue;
         }
         i++;
     }
-    if (test_st) {list.add_comments_st(title, st, comments);}
-    else {list.add_comments(title, comments);}   
+    if (test_id) {list.add_comments(id, comments);}
+    else {
+        if (test_st) {list.add_comments_st(title, st, comments);}
+        else {list.add_comments(title, comments);} 
+    }   
 }
