@@ -2,25 +2,26 @@
 #include <vector>
 #include <ctime>
 #include "date.h"
+using namespace std;
 
 #pragma once
 
 class Task {
 public:
-    std::string title;
-    std::string description;
+    string title;
+    string description;
     int id;
-    std::string status;
+    string status;
     Date open;
     Date close;
     int priority;
-    std::vector<std::string> comments;
+    vector<string> comments;
     int achiev;
-    std::vector<Task> subtask;
+    vector<Task> subtask;
 
-    Task (std::string t, std::string d, int i, int p) ;
+    Task (string t, string d, int i, int p) ;
 
-    Task (std::string t, std::string d, Date op, int i, int p) ;
+    Task (string t, string d, Date op, int i, int p) ;
 
     void print () ;
 

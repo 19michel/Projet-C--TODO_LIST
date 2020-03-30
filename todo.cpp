@@ -13,7 +13,7 @@ void To_Do::print () {
     for (int i = 0; i < l; i++) {
         list[i].print();
     };
-    cout << "" << endl;
+    cout << endl;
 }
 
 void To_Do::print (int p) {
@@ -70,15 +70,18 @@ tuple<int,int> To_Do::pos (int ide) {
             j = -1;
             break;
         }
-        for (j; j<list[i].subtask.size(); j++) {
+        bool test = false;
+        for (j=0; j<list[i].subtask.size(); j++) {
             if (list[i].subtask[j].id == ide) {
+                test = true;
                 break;
             } 
         }
+        if (test) {break;}
     }
     tuple<int,int> tup;
     get<0>(tup) = i;
-    get<1>(tup) = j + 1;
+    get<1>(tup) = j;
     return tup;
 }
 
@@ -98,11 +101,11 @@ void To_Do::add_comments (int ide, string c) {
     tuple<int,int> tup = pos(ide);
     int i = get<0>(tup);
     int j = get<1>(tup);
-    if (j == 0) {
+    if (j == -1) {
         list[i].comments.push_back(c); 
     }
     else {
-        list[i].subtask[j-1].comments.push_back(c);
+        list[i].subtask[j].comments.push_back(c);
     }
 }
 
@@ -122,12 +125,12 @@ void To_Do::change_priority (int ide, int p) {
     tuple<int,int> tup = pos(ide);
     int i = get<0>(tup);
     int j = get<1>(tup);
-    if (j == 0) {
+    if (j == -1) {
         list[i].priority = p;
         sort(list.begin(),list.end(),sort_priority); 
     }
     else {
-        list[i].subtask[j-1].priority = p;
+        list[i].subtask[j].priority = p;
         sort(list[i].subtask.begin(),list[i].subtask.end(),sort_priority);
     }
 }
@@ -141,11 +144,11 @@ void To_Do::change_achiev (int ide, int a) {
     tuple<int,int> tup = pos(ide);
     int i = get<0>(tup);
     int j = get<1>(tup);
-    if (j == 0) {
+    if (j == -1) {
         list[i].achiev = a; 
     }
     else {
-        list[i].subtask[j-1].achiev = a;
+        list[i].subtask[j].achiev = a;
     }
 }
 
@@ -175,14 +178,14 @@ vector<string> To_Do::end (int ide) {
     int i = get<0>(tup);
     int j = get<1>(tup);
     vector<string> date;
-    if (j == 0) {
+    if (j == -1) {
         list[i].closing();
         date = list[i].close.d_t_str();
         sort(list.begin(),list.end(),sort_priority); 
     }
     else {
-        list[i].subtask[j-1].closing();
-        date = list[i].subtask[j-1].close.d_t_str();
+        list[i].subtask[j].closing();
+        date = list[i].subtask[j].close.d_t_str();
         sort(list[i].subtask.begin(),list[i].subtask.end(),sort_priority);
     }
     return date;
@@ -208,12 +211,12 @@ void To_Do::end_dated (int ide, Date cl) {
     int i = get<0>(tup);
     int j = get<1>(tup);
     vector<string> date;
-    if (j == 0) {
+    if (j == -1) {
         list[i].closing_dated(cl);
         sort(list.begin(),list.end(),sort_priority); 
     }
     else {
-        list[i].subtask[j-1].closing_dated(cl);
+        list[i].subtask[j].closing_dated(cl);
         sort(list[i].subtask.begin(),list[i].subtask.end(),sort_priority);
     }
 }
