@@ -23,7 +23,7 @@ echo -e "\n"
 echo -e "\e[1;34;47mCOMMANDS\e[0m"
 echo -e "        Here are the commands you can use to create your to-do list and modify the tasks\n"
 echo -e "        LEGEND: \e[4;31mred\e[24m: obligatory argument\e[0m    \e[4;35mviolet\e[24m: obligatory argument with a choice\e[0m    \e[4;33myellow\e[24m: facultative argument\e[0m    \e[4;32mgreen\e[24m: facultative argument with a choice\e[0m\n" 
-
+echo -e "\n"
 echo -e "\e[1;4madd\e[24m \e[33m[ --title ]\e[0m \e[1mSTRING(\e[30mtitle\e[37m)\e[0m \e[1;33m[ --description ]\e[0m \e[1mSTRING(\e[30mdescription\e[37m)\e[0m \e[1;33m[ --priority ]\e[0m \e[1mINT(\e[30mpriority\e[37m)\e[0m \e[1;42m1\e[32;40m[ --id ]\e[0m \e[1;32mINT\e[37m(\e[30mid\e[37m)\e[0m \e[1;42m2\e[32;40m[ --maintask ]\e[0m \e[1;32mSTRING\e[37m(\e[30mmaintask\e[37m)\e[0m :"
 echo -e "        Create a new task in the to-do list. You can precise the \e[1;30mtitle\e[0m, the \e[1;30mdecription\e[0m and the \e[1;30mpriority\e[0m. If you precise nothing, the task will be entitled "No title", be described by "No description" and have a priority minimal of 0. If you want to create a subtask, you have to precise the main task with its title, \e[1;30mmaintask\e[0m, or its identity, \e[1;30mid\e[0m"
 echo -e "\n"
