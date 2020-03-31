@@ -1,0 +1,5 @@
+COMMAND ./todo
+
+add [ --title ] [ --description ] [ --priority ] :
+        Create a new task in the to-do list. You can precise the title, the decription and the priority. If you precise nothing, the
+        task will be entitled "No title", be described by "No description" and have a priority minimal of 0

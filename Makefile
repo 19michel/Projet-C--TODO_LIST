@@ -1,6 +1,7 @@
 CPPFLAGS=-g
 CXX=g++
 OBJS=main.o fonctions.o task.o todo.o date.o
+TEST=test.py
 EXE=todo
 
 all: $(EXE) test
@@ -14,5 +15,7 @@ $(EXE): $(OBJS)
 clean:
 	rm $(OBJS) $(EXE)
 
-test:
-	bash ./test.py
+test: $(TEST)
+	dos2unix $<
+	bash $<
+	rm test.todo

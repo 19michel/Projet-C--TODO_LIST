@@ -1,0 +1,4 @@
+COMMAND ./todo
+
+close [ --title ] [ --id ]
+        Set the status of the task called by the title or the id you give on closed

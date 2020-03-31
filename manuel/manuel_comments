@@ -1,0 +1,4 @@
+COMMAND ./todo
+
+comments [ --title ] [ --id ] --comments
+        Add a string of comment to the task called by the title which is given

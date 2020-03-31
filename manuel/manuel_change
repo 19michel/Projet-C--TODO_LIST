@@ -1,0 +1,5 @@
+COMMAND ./todo
+
+change [ --title ] [ --id ] [ --priority ] [ --achiev ]
+        Change a parameter of the task entitled by the title or caracterised by the id. It is necessary to precise which parameter by 
+        giving an argument among the list above 

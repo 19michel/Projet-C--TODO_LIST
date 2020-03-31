@@ -13,8 +13,10 @@ vector<string> main_add (const vector<string> & v_str, To_Do & list, int & i) {
     string title = "No title";
     string description = "No description";
     string st;
+    int id;
     int p = 0;
     bool test_st = false;
+    bool test_id = false;
     i++;
     while ((i<v_str.size()) && (v_str[i][0]=='-' && v_str[i][1]=='-')) {
         if (v_str[i] == "--title") {
@@ -42,11 +44,21 @@ vector<string> main_add (const vector<string> & v_str, To_Do & list, int & i) {
             i++;
             continue;
         }
+        if (string(v_str[i]) == "--id") {
+            i++;
+            id = stoi(v_str[i]);
+            test_id = true;
+            i++;
+            continue;
+        }
         i++;
     }
     vector<string> date;
-    if (test_st) {date = list.add_st(title, st, description, p);}
-    else {date = list.add(title, description, p);}
+    if (test_id) {date = list.add_st(title, id, description, p);}
+    else {
+        if (test_st) {date = list.add_st(title, st, description, p);}
+        else {date = list.add(title, description, p);}
+    }
     return date;
 }
 
@@ -55,8 +67,10 @@ void main_add_dated (const vector<string> &  v_str, To_Do & list, int & i) {
     string description = "No description";
     string st;
     Date op;
+    int id;
     int p = 0;
     bool test_st = false;
+    bool test_id = false;
     i++;
     while ((i<v_str.size()) && (v_str[i][0]=='-' && v_str[i][1]=='-')) {
         if (v_str[i] == "--title") {
@@ -101,10 +115,20 @@ void main_add_dated (const vector<string> &  v_str, To_Do & list, int & i) {
             i++;
             continue;
         }
+        if (v_str[i] == "--id") {
+            i++;
+            id = stoi(v_str[i]);
+            test_id = true;
+            i++;
+            continue;
+        }
         i++;
     }
-    if (test_st) {list.add_st_dated(title, st, description, p, op);}
-    else {list.add_dated(title, description, p, op);}
+    if (test_id) {list.add_st_dated(title, id, description, p, op);}
+    else {
+        if (test_st) {list.add_st_dated(title, st, description, p, op);}
+        else {list.add_dated(title, description, p, op);}
+    }
 }
 
 vector<string> main_close (const vector<string> & v_str, To_Do & list, int & i) {
@@ -236,9 +260,9 @@ To_Do main_notxt (const vector<string> & v_str) {
     return list;
 };
 
-vector<string> extract () {
+vector<string> extract (string file) {
     ifstream ifs;
-    ifs.open("list.todo");
+    ifs.open(file);
     vector<string> extr {};
     string line;
     while (getline(ifs, line)) {
@@ -249,10 +273,8 @@ vector<string> extract () {
     return extr;
 }
 
-void main_del () {
-    ofstream ofs;
-    ofs.open("list.todo", ofstream::out | ofstream::trunc);
-    ofs.close();
+void main_del (string file) {
+    remove(file.c_str());
 };
 
 void main_change (const vector<string> & v_str, To_Do & list, int & i) {
@@ -371,4 +393,28 @@ void main_comments (const vector<string> & v_str, To_Do & list, int & i) {
         if (test_st) {list.add_comments_st(title, st, comments);}
         else {list.add_comments(title, comments);} 
     }   
+}
+
+void main_man (const vector<string> & v_str, int & i) {
+    if (v_str.size() > i && v_str[i] == "add") {
+        system("less manuel/manuel_add");
+    }
+    else if (v_str.size() > i && v_str[i] == "close") {
+        system("less manuel/manuel_close");
+    }
+    else if (v_str.size() > i && v_str[i] == "comments") {
+        system("less manuel/manuel_comments");
+    }
+    else if (v_str.size() > i && v_str[i] == "change") {
+        system("less manuel/manuel_change");
+    }
+    else if (v_str.size() > i && v_str[i] == "del") {
+        system("less manuel/manuel_del");
+    }
+    else if (v_str.size() > i && v_str[i] == "print") {
+        system("less manuel/manuel_print");
+    }
+    else {
+        system("less manuel/manuel_todo");
+    }
 }

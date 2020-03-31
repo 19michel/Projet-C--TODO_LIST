@@ -22,9 +22,13 @@ public:
 
     vector<string> add_st (string st, string t, string d, int p) ;
 
+    vector<string> add_st (string st, int ide, string d, int p) ;
+
     void add_dated (string t, string d, int p, Date op) ;
 
     void add_st_dated (string st, string t, string d, int p, Date op) ;
+
+    void add_st_dated (string st, int ide, string d, int p, Date op) ;
 
     int pos (string t) ;
 

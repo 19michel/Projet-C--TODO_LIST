@@ -1,3 +1,4 @@
+#include <cstdio>
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -11,7 +12,7 @@ using namespace std;
 
 vector<string> c_t_str (int argc, char**  argv);
 
-vector<string> extract ();
+vector<string> extract (string file);
 
 void write (ofstream& ofs, const vector<string> & v_str, int i, int nb);
 
@@ -29,4 +30,6 @@ void main_change (const vector<string> & v_str, To_Do & list, int & i);
 
 void main_comments (const vector<string> & v_str, To_Do & list, int & i);
 
-void main_del ();
+void main_del (string file);
+
+void main_man (const vector<string> & v_str, int & i);

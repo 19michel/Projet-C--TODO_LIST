@@ -25,6 +25,8 @@ public:
 
     void print () ;
 
+    void print (string str) ;
+
     void closing ();
 
     void closing_dated (Date cl);

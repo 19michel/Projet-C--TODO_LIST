@@ -8,20 +8,36 @@
 using namespace std;
 
 int main(int argc, char** argv) {
-    if (argc > 0 && string(argv[1]) == "--help") {
-        system("less manuel");
-    }
     vector<string> v_str = c_t_str(argc, argv);
-    vector<string> extr = extract();
+    vector<string> extr;
     ofstream ofs;
-    ofs.open("list.todo",ofstream::out | ofstream::app);
-    To_Do list; 
-    list = main_notxt(extr);
-    int size = v_str.size();
+    To_Do list;
+    string file;
     int i = 1;
-    while (i<size) {
-        if (string(v_str[i]) == "print") {
-            if (i+1<size && string(v_str[i+1]) == "--priority") {
+    if (v_str.size() > i && v_str[i] == "--help") {
+        i++;
+        main_man(v_str, i);
+        return 0;
+    }
+    
+    if (v_str.size() > i && v_str[i] == "--file") {
+        i++;
+        file = v_str[i];
+        i++;
+    }
+    else {
+        file = "list.todo";
+    }
+    if (v_str.size() > i-1 && string(argv[i]) == "del")  {
+            main_del(file);
+            i++;
+    }
+    extr = extract(file);
+    list = main_notxt(extr);
+    ofs.open(file,ofstream::out | ofstream::app);
+    while (i<v_str.size()) {
+        if (v_str[i] == "print") {
+            if (i+1<v_str.size() && v_str[i+1] == "--priority") {
                 i=i+2;
                 list.print(stoi(v_str[i]));
                 i++;
@@ -32,7 +48,7 @@ int main(int argc, char** argv) {
             }
             continue;
         }
-        if (string(v_str[i]) == "add") {
+        if (v_str[i] == "add") {
             int j = i;
             vector<string> date = main_add(v_str, list, i);
             write(ofs,v_str,j,i-j);
@@ -42,7 +58,7 @@ int main(int argc, char** argv) {
             write(ofs,date,0,6);
             continue;
         }
-        if (string(v_str[i]) == "close") {
+        if (v_str[i] == "close") {
             int j = i;
             vector<string> date = main_close(v_str, list, i);
             write(ofs,v_str,j,i-j);
@@ -52,19 +68,19 @@ int main(int argc, char** argv) {
             write(ofs,date,0,6);
             continue;
         }
-        if (string(v_str[i]) == "del") {
-            main_del();
+        if (v_str[i] == "del") {
+            main_del(file);
             i += 1;
             To_Do list {};
             continue;
         }
-        if (string(v_str[i]) == "change") {
+        if (v_str[i] == "change") {
             int j = i;
             main_change(v_str, list, i);
             write(ofs,v_str,j,i-j);
             continue;
         }
-        if (string(v_str[i]) == "comments") {
+        if (v_str[i] == "comments") {
             int j = i;
             main_comments(v_str, list, i);
             write(ofs,v_str,j,i-j);

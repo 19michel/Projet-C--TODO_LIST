@@ -1,0 +1,5 @@
+COMMAND ./todo
+
+print [ --priority ]
+        Display the to-do list task by task. If you precise the priority with an int p, only the tasks with a priority superior to p 
+        will be printed

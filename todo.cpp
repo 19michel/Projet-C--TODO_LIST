@@ -11,7 +11,7 @@ To_Do::To_Do () : nb(0), list({}) {};
 void To_Do::print () {
     int l = list.size();
     for (int i = 0; i < l; i++) {
-        list[i].print();
+        list[i].print("\n");
     };
     cout << endl;
 }
@@ -20,13 +20,15 @@ void To_Do::print (int p) {
     int l = list.size();
     int i = 0;
     while ((i<l) && (list[i].priority >= p)) {
-        list[i].print();
+        list[i].print("\n");
         i++;
     };
     cout << "" << endl;   
 } 
 
 vector<string> To_Do::add (string t, string d, int p) {
+    if (p>10) {p=10;}
+    if (p<0) {p=0;}
     list.push_back(Task (t, d, nb, p));
     vector<string> date = list[list.size() - 1].open.d_t_str();
     nb++;
@@ -35,6 +37,8 @@ vector<string> To_Do::add (string t, string d, int p) {
 }
 
 vector<string> To_Do::add_st (string st, string t, string d, int p) {
+    if (p>10) {p=10;}
+    if (p<0) {p=0;}
     int i = pos(t);
     list[i].subtask.push_back(Task (st, d, nb, p));
     vector<string> date = list[i].subtask[list[i].subtask.size() - 1].open.d_t_str();
@@ -43,14 +47,36 @@ vector<string> To_Do::add_st (string st, string t, string d, int p) {
     return date;
 }
 
+vector<string> To_Do::add_st (string st, int ide, string d, int p) {
+    if (p>10) {p=10;}
+    if (p<0) {p=0;}
+    int i = get<0>(pos(ide));
+    list[i].subtask.push_back(Task (st, d, nb, p));
+    vector<string> date = list[i].subtask[list[i].subtask.size() - 1].open.d_t_str();
+    nb++;
+    sort(list[i].subtask.begin(),list[i].subtask.end(),sort_priority);
+    return date;
+}
+
 void To_Do::add_dated (string t, string d, int p, Date op) {
+    if (p>10) {p=10;}
+    if (p<0) {p=0;}
     list.push_back(Task (t, d, op, nb, p));
     nb++;
     sort(list.begin(),list.end(),sort_priority);
 }
 
 void To_Do::add_st_dated (string st, string t, string d, int p, Date op) {
+    if (p>10) {p=10;}
+    if (p<0) {p=0;}
     int i = pos(t);
+    list[i].subtask.push_back(Task (st, d, op, nb, p));
+    nb++;
+    sort(list[i].subtask.begin(),list[i].subtask.end(),sort_priority);
+}
+
+void To_Do::add_st_dated (string st, int ide, string d, int p, Date op) {
+    int i = get<0>(pos(ide));
     list[i].subtask.push_back(Task (st, d, op, nb, p));
     nb++;
     sort(list[i].subtask.begin(),list[i].subtask.end(),sort_priority);

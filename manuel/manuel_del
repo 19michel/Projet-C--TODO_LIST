@@ -1,0 +1,4 @@
+COMMAND ./todo
+
+del
+        Delete the to-do list. It erease all the content of the file list.todo in which the previous commands are writed

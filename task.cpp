@@ -40,8 +40,33 @@ void Task::print () {
         for (int i {}; i<subtask.size(); i++) {
             subtask[i].print();
         }
+    }
+}
+
+void Task::print (string str) {
+    cout << id << " / " << title << ": " << description << " -> " << status << ", opened on ";
+    open.print();
+    if (status ==  "close" ) {
+        cout << " and closed on ";
+        close.print();
+    } 
+    cout << ". Priority: " << priority << ". Achievement: " << achiev << "%" << endl ;
+    if (not(comments.empty())) {
+        cout << "  Comments:" << endl;
+        int l=comments.size();
+        for (int i {}; i<l; i++) {
+            cout << "      " << comments[i] << endl;
+        }
+    }
+
+    if (not(subtask.empty())) {
+        cout << "  TASKS:" << endl;
+        for (int i {}; i<subtask.size(); i++) {
+            subtask[i].print();
+        }
         cout << endl;
     }
+    cout << str;
 }
 
 void Task::closing () {
