@@ -400,24 +400,24 @@ void main_comments (const vector<string> & v_str, To_Do & list, int & i) {
 
 void main_man (const vector<string> & v_str, int & i) {
     if (v_str.size() > i && v_str[i] == "add") {
-        system("bash manuel/manuel_add");
+        system("bash manuel/manuel_add.bat");
     }
     else if (v_str.size() > i && v_str[i] == "close") {
-        system("bash manuel/manuel_close");
+        system("bash manuel/manuel_close.bat");
     }
     else if (v_str.size() > i && v_str[i] == "comments") {
-        system("bash manuel/manuel_comments");
+        system("bash manuel/manuel_comments.bat");
     }
     else if (v_str.size() > i && v_str[i] == "change") {
-        system("bash manuel/manuel_change");
+        system("bash manuel/manuel_change.bat");
     }
     else if (v_str.size() > i && v_str[i] == "del") {
-        system("bash manuel/manuel_del");
+        system("bash manuel/manuel_del.bat");
     }
     else if (v_str.size() > i && v_str[i] == "print") {
-        system("bash manuel/manuel_print");
+        system("bash manuel/manuel_print.bat");
     }
     else {
-        system("bash manuel/manuel_todo");
+        system("bash manuel/manuel_todo.bat");
     }
 }
