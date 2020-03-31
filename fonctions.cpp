@@ -37,7 +37,7 @@ vector<string> main_add (const vector<string> & v_str, To_Do & list, int & i) {
             i++;
             continue;
         }
-        if (v_str[i] == "--subtask") {
+        if (v_str[i] == "--maintask") {
             i++;
             st=v_str[i];
             test_st = true;
@@ -108,7 +108,7 @@ void main_add_dated (const vector<string> &  v_str, To_Do & list, int & i) {
             i++;
             continue;   
         }
-        if (v_str[i] == "--subtask") {
+        if (v_str[i] == "--maintask") {
             i++;
             st=v_str[i];
             test_st = true;
@@ -145,7 +145,7 @@ vector<string> main_close (const vector<string> & v_str, To_Do & list, int & i) 
             i++;
             continue;
         }
-        if (string(v_str[i]) == "--subtask") {
+        if (string(v_str[i]) == "--maintask") {
             i++;
             st=string(v_str[i]);
             test_st = true;
@@ -163,11 +163,11 @@ vector<string> main_close (const vector<string> & v_str, To_Do & list, int & i) 
     }
     vector<string> date;
     if (test_id) {
-        date = list.end(id);
+        date = list.close(id);
     }
     else {
-        if (test_st) {date = list.end_st(title, st);}
-        else {date = list.end(title);}
+        if (test_st) {date = list.close_st(title, st);}
+        else {date = list.close(title);}
     }
     return date;
 }
@@ -204,7 +204,7 @@ void main_close_dated (const vector<string> & v_str, To_Do & list, int & i) {
             i++;
             continue;   
         }
-        if (v_str[i] == "--subtask") {
+        if (v_str[i] == "--maintask") {
             i++;
             st=v_str[i];
             test_st = true;
@@ -220,21 +220,24 @@ void main_close_dated (const vector<string> & v_str, To_Do & list, int & i) {
         }
         i++;
     }
-    if (test_id) {list.end_dated(id, cl);}
+    if (test_id) {list.close_dated(id, cl);}
     else {
-        if (test_st) {list.end_st_dated(title, st, cl);}
-        else {list.end_dated(title, cl);}
+        if (test_st) {list.close_st_dated(title, st, cl);}
+        else {list.close_dated(title, cl);}
     }
 }
 
-void write (ofstream& ofs, const vector<string> & argv, int i, int nb) {
+void write (string file, const vector<string> & argv, int i, int nb) {
+    ofstream ofs;
+    ofs.open(file,ofstream::out | ofstream::app);
     for (int j = 0; j<nb; j++) {
         ofs << argv[i+j] << endl;
     }
+    ofs.close();
 }
 
 
-To_Do main_notxt (const vector<string> & v_str) {
+To_Do main_no_write (const vector<string> & v_str) {
     To_Do list; 
     int argc = v_str.size();
     int i = 0;
@@ -307,7 +310,7 @@ void main_change (const vector<string> & v_str, To_Do & list, int & i) {
             i++;
             continue;
         }
-        if (v_str[i] == "--subtask") {
+        if (v_str[i] == "--maintask") {
             i++;
             st=v_str[i];
             test_st = true;
@@ -372,7 +375,7 @@ void main_comments (const vector<string> & v_str, To_Do & list, int & i) {
             i++;
             continue;
         }
-        if (v_str[i] == "--subtask") {
+        if (v_str[i] == "--maintask") {
             i++;
             st=v_str[i];
             test_st = true;
@@ -397,24 +400,24 @@ void main_comments (const vector<string> & v_str, To_Do & list, int & i) {
 
 void main_man (const vector<string> & v_str, int & i) {
     if (v_str.size() > i && v_str[i] == "add") {
-        system("less manuel/manuel_add");
+        system("bash manuel/manuel_add");
     }
     else if (v_str.size() > i && v_str[i] == "close") {
-        system("less manuel/manuel_close");
+        system("bash manuel/manuel_close");
     }
     else if (v_str.size() > i && v_str[i] == "comments") {
-        system("less manuel/manuel_comments");
+        system("bash manuel/manuel_comments");
     }
     else if (v_str.size() > i && v_str[i] == "change") {
-        system("less manuel/manuel_change");
+        system("bash manuel/manuel_change");
     }
     else if (v_str.size() > i && v_str[i] == "del") {
-        system("less manuel/manuel_del");
+        system("bash manuel/manuel_del");
     }
     else if (v_str.size() > i && v_str[i] == "print") {
-        system("less manuel/manuel_print");
+        system("bash manuel/manuel_print");
     }
     else {
-        system("less manuel/manuel_todo");
+        system("bash manuel/manuel_todo");
     }
 }

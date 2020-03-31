@@ -114,7 +114,7 @@ echo -e "\e[1;4;30mSUBTASK\e[0m"
 
 #L'ajout...
 echo -e "      \e[4mAjout avec le titre de la tache principale\e[0m"
-./todo --file "test.todo" add --title "Sous-tache" --description "Une description" --priority 2 --subtask "No title"
+./todo --file "test.todo" add --title "Sous-tache" --description "Une description" --priority 2 --maintask "No title"
 dST=`date +%-d`; mST=`date +%-m`; yST=`date +%-y`; HST=`date +%-H`; MST=`date +%-M`; SST=`date +%-S`
 ddST=`date --date '1 second ago' +%-d`; mmST=`date --date '1 second ago' +%-m`; yyST=`date --date '1 second ago' +%-y`; HHST=`date --date '1 second ago' +%-H`; MMST=`date --date '1 second ago' +%-M`; SSST=`date --date '1 second ago' +%-S`
 echo -e "\n1 / titre: description -> open, opened on $d2/$m2/20$y2 $H2:$M2:$S2. Priority: 10. Achievement: 0%\n\n0 / No title: No description -> open, opened on $d/$m/20$y $H:$M:$S. Priority: 5. Achievement: 47%\n  Comments:\n      Commentaire test\n  TASKS:\n2 / Sous-tache: Une description -> open, opened on $dST/$mST/20$yST $HST:$MST:$SST. Priority: 2. Achievement: 0%\n\n\n" > subtask.txt

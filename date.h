@@ -13,10 +13,12 @@ private:
     int min;
     int sec;
 public:
+
     Date (int day = 01, int month = 01, int year = 2000, int hours = 0, int minutes = 0, int seconds = 0);
+
     void print ();
+    /* Affiche la date sous la forme dd/mm/yyyy HH:MM:SS */
+
     vector<string> d_t_str ();
+    /* Renvoie la date actuelle */
 };
-
-
-

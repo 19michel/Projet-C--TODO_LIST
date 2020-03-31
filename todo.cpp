@@ -191,7 +191,7 @@ void To_Do::change_achiev_st (string st, string t, int a) {
     list[i].subtask[j].achiev = a;
 }
 
-vector<string> To_Do::end (string t) {
+vector<string> To_Do::close (string t) {
     int i = pos(t);
     list[i].closing();
     vector<string> date = list[i].close.d_t_str();
@@ -199,7 +199,7 @@ vector<string> To_Do::end (string t) {
     return date;
 }
 
-vector<string> To_Do::end (int ide) {
+vector<string> To_Do::close (int ide) {
     tuple<int,int> tup = pos(ide);
     int i = get<0>(tup);
     int j = get<1>(tup);
@@ -217,7 +217,7 @@ vector<string> To_Do::end (int ide) {
     return date;
 }
 
-vector<string> To_Do::end_st (string st, string t) {
+vector<string> To_Do::close_st (string st, string t) {
     int i = pos(t);
     int j = pos_st(st,t);
     list[i].subtask[j].closing();
@@ -226,13 +226,13 @@ vector<string> To_Do::end_st (string st, string t) {
     return date;
 }
 
-void To_Do::end_dated (string t, Date cl) {
+void To_Do::close_dated (string t, Date cl) {
     int i = pos(t);
     list[i].closing_dated(cl);
     sort(list.begin(),list.end(),sort_priority);
 }
 
-void To_Do::end_dated (int ide, Date cl) {
+void To_Do::close_dated (int ide, Date cl) {
     tuple<int,int> tup = pos(ide);
     int i = get<0>(tup);
     int j = get<1>(tup);
@@ -247,7 +247,7 @@ void To_Do::end_dated (int ide, Date cl) {
     }
 }
 
-void To_Do::end_st_dated (string st, string t, Date cl) {
+void To_Do::close_st_dated (string st, string t, Date cl) {
     int i = pos(t);
     int j = pos_st(st,t);
     list[i].subtask[j].closing_dated(cl);

@@ -1,4 +1,12 @@
-COMMAND ./todo
-
-comments [ --title ] [ --id ] --comments
-        Add a string of comment to the task called by the title which is given
+echo -e "\e[1;34;47mCOMMAND ./todo\e[0m"
+echo -e "LEGEND: \e[4;31mred\e[24m: obligatory argument\e[0m    \e[4;35mviolet\e[24m: obligatory argument with a choice\e[0m    \e[4;33myellow\e[24m: facultative argument\e[0m    \e[4;32mgreen\e[24m: facultative argument with a choice\e[0m\n" 
+echo -e "\e[1;4mcomments\e[24m \e[1;42m1\e[35;40m[ --title ]\e[0m \e[1;32mSTRING\e[37m(\e[30mtitle\e[37m)\e[0m \e[1;42m1\e[35;40m[ --maintask ]\e[0m \e[1;32mSTRING\e[37m(\e[30mmaintask\e[37m)\e[0m \e[1;42m2\e[35;40m[ --id ]\e[0m \e[1;32mINT\e[37m(\e[30mid\e[37m)\e[0m \e[1;31m[ --comments ]\e[0m \e[1mSTRING(\e[30mcomments\e[37m)\e[0m :"
+echo -e "        Add a \e[1;30mcomment\e[0m to the task called by the \e[1;30mtitle\e[0m or the \e[1;30mid\e[0m which is given, or to the subtask called by \e[1;30mmaintask\e[0m name plus the subtask name \e[1;30mtitle\e[0m or just by the \e[1;30mid\e[0m which are given"
+echo -e "\n"
+echo -e "\e[1;34;47mEXAMPLES\e[0m"
+echo -e "\n"
+echo -e "\e[1m./todo --file 'example.todo' print\n\e[0m"
+echo -e "   \e[1;32m=>\e[30m  1 / No title: No description -> open, opened on 31/3/2020 17:49:52. Priority: 10. Achievement: 25%\n\n       0 / Example: It's an example -> open, opened on 31/3/2020 17:49:23. Priority: 0. Achievement: 0%\n         TASKS:\n       2 / Subtask: It's a subtask -> open, opened on 31/3/2020 17:51:55. Priority: 5. Achievement: 0%\n\e[0m"
+echo -e "\e[1m./todo --file 'example.todo' comments --title 'No title' --comments 'It's a comment' print\e[0m"
+echo -e "   \e[1;32m=>\e[30m  1 / No title: No description -> open, opened on 31/3/2020 17:49:52. Priority: 10. Achievement: 25%\n         Comments:\n             It's a comment\n\n       0 / Example: It's an example -> open, opened on 31/3/2020 17:49:23. Priority: 0. Achievement: 0%\n         TASKS:\n       2 / Subtask: It's a subtask -> open, opened on 31/3/2020 17:51:55. Priority: 5. Achievement: 0%\n\e[0m"
+echo -e "\n"

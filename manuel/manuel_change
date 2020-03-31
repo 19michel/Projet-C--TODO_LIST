@@ -1,5 +1,14 @@
-COMMAND ./todo
-
-change [ --title ] [ --id ] [ --priority ] [ --achiev ]
-        Change a parameter of the task entitled by the title or caracterised by the id. It is necessary to precise which parameter by 
-        giving an argument among the list above 
+echo -e "\e[1;34;47mCOMMAND ./todo\e[0m"
+echo -e "LEGEND: \e[4;31mred\e[24m: obligatory argument\e[0m    \e[4;35mviolet\e[24m: obligatory argument with a choice\e[0m    \e[4;33myellow\e[24m: facultative argument\e[0m    \e[4;32mgreen\e[24m: facultative argument with a choice\e[0m\n" 
+echo -e "\e[1;4mchange\e[24m \e[1;42m1\e[35;40m[ --title ]\e[0m \e[1;32mSTRING\e[37m(\e[30mtitle\e[37m)\e[0m \e[1;42m1\e[35;40m[ --maintask ]\e[0m \e[1;32mSTRING\e[37m(\e[30mmaintask\e[37m)\e[0m \e[1;42m2\e[35;40m[ --id ]\e[0m \e[1;32mINT\e[37m(\e[30mid\e[37m)\e[0m \e[1;44m1\e[35;40m[ --priority ]\e[0m \e[1;34mINT\e[37m(\e[30mpriority\e[37m)\e[0m \e[1;44m2\e[35;40m[ --achiev ]\e[0m \e[1;34mINT\e[37m(\e[30machievement\e[37m)\e[0m :"
+echo -e "        Change a parameter of the task entitled by the \e[1;30mtitle\e[0m or caracterised by the \e[1;30mid\e[0m. If it is for a subtask, you can give the \e[1;30mtitle\e[0m of the subtask and you have to precise the main task name with the \e[1;30mmaintask\e[0m, or you can just call the subtask by its \e[1;30mid\e[0m. It is necessary to precise which parameter by giving an argument among \e[1;30mpriority\e[0m and \e[1;30machievement\e[0m." 
+echo -e "\n"
+echo -e "\e[1;34;47mEXAMPLES\e[0m"
+echo -e "\n"
+echo -e "\e[1m./todo --file 'example.todo' print\n\e[0m"
+echo -e "   \e[1;32m=>\e[30m  1 / No title: No description -> open, opened on 31/3/2020 17:49:52. Priority: 10. Achievement: 0%\n\n       0 / Example: It's an example -> open, opened on 31/3/2020 17:49:23. Priority: 0. Achievement: 0%\n         TASKS:\n       2 / Subtask: It's a subtask -> open, opened on 31/3/2020 17:51:55. Priority: 0. Achievement: 0%\n\e[0m"
+echo -e "\e[1m./todo --file 'example.todo' change --id 1 --achiev 25 print\e[0m"
+echo -e "   \e[1;32m=>\e[30m  1 / No title: No description -> open, opened on 31/3/2020 17:49:52. Priority: 10. Achievement: 25%\n\n       0 / Example: It's an example -> open, opened on 31/3/2020 17:49:23. Priority: 0. Achievement: 0%\n         TASKS:\n       2 / Subtask: It's a subtask -> open, opened on 31/3/2020 17:51:55. Priority: 0. Achievement: 0%\n\e[0m"
+echo -e "\e[1m./todo --file 'example.todo' change --title 'Subtask' --maintask 'Example' --priority 5 print\e[0m"
+echo -e "   \e[1;32m=>\e[30m  1 / No title: No description -> open, opened on 31/3/2020 17:49:52. Priority: 10. Achievement: 25%\n\n       0 / Example: It's an example -> open, opened on 31/3/2020 17:49:23. Priority: 0. Achievement: 0%\n         TASKS:\n       2 / Subtask: It's a subtask -> open, opened on 31/3/2020 17:51:55. Priority: 5. Achievement: 0%\n\e[0m"
+echo -e "\n"

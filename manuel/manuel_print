@@ -1,5 +1,12 @@
-COMMAND ./todo
-
-print [ --priority ]
-        Display the to-do list task by task. If you precise the priority with an int p, only the tasks with a priority superior to p 
-        will be printed
+echo -e "\e[1;34;47mCOMMAND ./todo\e[0m"
+echo -e "LEGEND: \e[4;31mred\e[24m: obligatory argument\e[0m    \e[4;35mviolet\e[24m: obligatory argument with a choice\e[0m    \e[4;33myellow\e[24m: facultative argument\e[0m    \e[4;32mgreen\e[24m: facultative argument with a choice\e[0m\n"
+echo -e "\e[1;4mprint\e[24m \e[1;33m[ --priority ]\e[0m \e[1mINT(\e[30mpriority\e[37m)\e[0m :"
+echo -e "        Display the to-do list task by task. If you precise the \e[1;30mpriority\e[0m, only the tasks with a priority superior to the one which is given are printed"
+echo -e "\n"
+echo -e "\e[1;34;47mEXAMPLES\e[0m"
+echo -e "\n"
+echo -e "\e[1m./todo --file 'example.todo' print\n\e[0m"
+echo -e "   \e[1;32m=>\e[30m  1 / No title: No description -> open, opened on 31/3/2020 17:49:52. Priority: 10. Achievement: 25%\n         Comments:\n             It's a comment\n\n       0 / Example: It's an example -> open, opened on 31/3/2020 17:49:23. Priority: 0. Achievement: 0%\n         TASKS:\n       2 / Subtask: It's a subtask -> open, opened on 31/3/2020 17:51:55. Priority: 5. Achievement: 0%\n\e[0m"
+echo -e "\e[1m./todo --file 'example.todo' print --priority 6\e[0m"
+echo -e "   \e[1;32m=>\e[30m  1 / No title: No description -> open, opened on 31/3/2020 17:49:52. Priority: 10. Achievement: 25%\n         Comments:\n             It's a comment\n\e[0m"
+echo -e "\n"
